@@ -1,4 +1,4 @@
-const BACKEND_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
+const BACKEND_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const triggerPipelineRun = async (): Promise<{ success: boolean; error?: string }> => {
   const res = await fetch(`${BACKEND_API_URL}api/run`, { method: "POST" });
@@ -7,7 +7,7 @@ export const triggerPipelineRun = async (): Promise<{ success: boolean; error?: 
 
 export const checkBackendHealth = async (): Promise<boolean> => {
   try {
-    const res = await fetch(`${BACKEND_API_URL}/api/health`);
+    const res = await fetch(`${BACKEND_API_URL}api/health`);
     return res.ok;
   } catch {
     return false;

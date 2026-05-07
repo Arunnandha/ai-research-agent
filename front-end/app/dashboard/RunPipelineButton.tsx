@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Play, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+const BACKEND_API_URL = process.env.NEXT_PUBLIC_API_URL;
 export default function RunPipelineButton() {
   const [status, setStatus] = useState<"idle" | "running" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -13,7 +13,7 @@ export default function RunPipelineButton() {
     setStatus("running");
     setMessage("");
     try {
-      const res = await fetch("/api/run", { method: "POST" });
+      const res = await fetch(`${BACKEND_API_URL}api/run`, { method: "POST" });
       const data = await res.json();
       if (data.success) {
         setStatus("done");
