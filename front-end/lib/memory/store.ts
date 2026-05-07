@@ -38,8 +38,12 @@ const loadMemoryStore = async (): Promise<MemoryStoreData> => {
 };
 
 const saveMemoryStore = async (store: MemoryStoreData): Promise<void> => {
-  await mkdir(DATA_DIR, { recursive: true });
-  await writeFile(MEMORY_FILE_PATH, JSON.stringify(store, null, 2), "utf8");
+  try {
+    await mkdir(DATA_DIR, { recursive: true });
+    await writeFile(MEMORY_FILE_PATH, JSON.stringify(store, null, 2), "utf8");
+  } catch {
+    // Silently skip on read-only filesystems (e.g. Vercel serverless)
+  }
 };
 
 export const buildSignalsFromItems = (items: MemoryComparableItem[]): MemorySignal[] => {
