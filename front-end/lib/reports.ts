@@ -27,7 +27,7 @@ export interface AgentReport {
   }>;
 }
 
-const REPORTS_DIR = path.resolve(process.cwd(), "..", "reports");
+const REPORTS_DIR = path.resolve(process.cwd(), "data", "reports");
 
 const isJsonReport = (fileName: string): boolean => /^\d{4}-\d{2}-\d{2}\.json$/.test(fileName);
 

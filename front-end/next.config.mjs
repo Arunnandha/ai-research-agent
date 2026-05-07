@@ -1,6 +1,13 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-  // Next.js 14 config
+  // Keep LangChain packages as server-side external to avoid bundling issues
+  serverExternalPackages: [
+    "@langchain/langgraph",
+    "@langchain/openai",
+    "langchain",
+    "openai",
+    "rss-parser",
+  ],
 };
 
 export default nextConfig;

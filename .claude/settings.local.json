@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"d:\\\\AI_Projects\\\\ai-research-agent\" -Force)",
+      "Bash(Select-Object Name, FullName)"
+    ]
+  }
+}
