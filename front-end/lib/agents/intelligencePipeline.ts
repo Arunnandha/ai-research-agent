@@ -23,13 +23,14 @@ export const runIntelligencePipeline = async (
     maxItems: options.maxItems ?? 20,
   });
 
-  await upsertDailyMemoryRecord({
+  // Best-effort memory write — silently skipped on read-only filesystems (Vercel)
+  upsertDailyMemoryRecord({
     date: new Date().toISOString().slice(0, 10),
     itemCount: state.enrichedItems.length,
     trends: state.insight.trends,
     gaps: state.insight.gaps,
     signals: buildSignalsFromItems(state.enrichedItems),
-  });
+  }).catch(() => undefined);
 
   return {
     items: state.enrichedItems,
