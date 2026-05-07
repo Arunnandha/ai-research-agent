@@ -1,12 +1,15 @@
-import { getLatestReport } from "@/lib/reports";
+"use client";
+
+import { useState } from "react";
 import { BarChart3, Calendar } from "lucide-react";
 import RunPipelineButton from "./RunPipelineButton";
 import DashboardContent from "./DashboardContent";
+import type { AgentReport } from "@/lib/reports";
 
-export default async function DashboardPage() {
-  const latest = await getLatestReport();
+export default function DashboardPage() {
+  const [report, setReport] = useState<{ date: string; data: AgentReport } | null>(null);
 
-  if (!latest) {
+  if (!report) {
     return (
       <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-center gap-6 p-8">
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-100">
@@ -18,12 +21,10 @@ export default async function DashboardPage() {
             Run the pipeline to fetch data from your sources, analyze trends, and generate startup ideas.
           </p>
         </div>
-        <RunPipelineButton />
+        <RunPipelineButton onSuccess={setReport} />
       </main>
     );
   }
-
-  const { date, data } = latest;
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-6 py-8">
@@ -34,13 +35,13 @@ export default async function DashboardPage() {
           </h1>
           <p className="mt-1 flex items-center gap-1.5 text-sm text-zinc-400">
             <Calendar size={13} />
-            {date}
+            {report.date}
           </p>
         </div>
-        <RunPipelineButton />
+        <RunPipelineButton onSuccess={setReport} />
       </header>
 
-      <DashboardContent data={data} />
+      <DashboardContent data={report.data} />
     </main>
   );
 }

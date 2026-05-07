@@ -2,26 +2,32 @@
 
 import { useState } from "react";
 import { Play, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
+import type { AgentReport } from "@/lib/reports";
 
-export default function RunPipelineButton() {
+interface Props {
+  onSuccess: (result: { date: string; data: AgentReport }) => void;
+}
+
+export default function RunPipelineButton({ onSuccess }: Props) {
   const [status, setStatus] = useState<"idle" | "running" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
-  const router = useRouter();
 
   const handleRun = async () => {
     setStatus("running");
     setMessage("");
     try {
       const res = await fetch("/api/run", { method: "POST" });
-      const data = await res.json();
-      if (data.success) {
+      const json = await res.json();
+      if (json.success) {
         setStatus("done");
-        setMessage(`${data.itemCount} items processed`);
-        setTimeout(() => router.refresh(), 1500);
+        setMessage(`${json.itemCount} items processed`);
+        onSuccess({
+          date: new Date().toISOString().slice(0, 10),
+          data: json.report as AgentReport,
+        });
       } else {
         setStatus("error");
-        setMessage(data.error ?? "Pipeline failed.");
+        setMessage(json.error ?? "Pipeline failed.");
       }
     } catch {
       setStatus("error");
