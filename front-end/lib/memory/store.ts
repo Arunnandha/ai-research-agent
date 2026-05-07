@@ -1,6 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { DATA_DIR } from "../utils/paths";
+
 export interface MemorySignal {
   key: string;
   count: number;
@@ -23,7 +25,6 @@ interface MemoryComparableItem {
   business_model: string;
 }
 
-const DATA_DIR = path.resolve(process.cwd(), "data");
 const MEMORY_FILE_PATH = path.join(DATA_DIR, "memory.json");
 
 const loadMemoryStore = async (): Promise<MemoryStoreData> => {

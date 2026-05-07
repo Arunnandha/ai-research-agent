@@ -2,8 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import type { IntelligenceReport } from "../agents/intelligencePipeline";
-
-const REPORTS_DIR = path.resolve(process.cwd(), "data", "reports");
+import { REPORTS_DIR } from "./paths";
 
 const formatDate = (date: Date): string => {
   return date.toISOString().slice(0, 10);

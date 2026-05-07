@@ -1,6 +1,8 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
+import { REPORTS_DIR } from "./utils/paths";
+
 export interface AgentReport {
   items: Array<{
     title: string;
@@ -26,8 +28,6 @@ export interface AgentReport {
     differentiation: string;
   }>;
 }
-
-const REPORTS_DIR = path.resolve(process.cwd(), "data", "reports");
 
 const isJsonReport = (fileName: string): boolean => /^\d{4}-\d{2}-\d{2}\.json$/.test(fileName);
 
