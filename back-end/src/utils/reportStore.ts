@@ -3,7 +3,7 @@ import path from "node:path";
 
 import type { IntelligenceReport } from "../agents/intelligencePipeline.js";
 
-const REPORTS_DIR = path.join(process.cwd(), "reports");
+const REPORTS_DIR = path.resolve(process.cwd(), "..", "reports");
 
 const formatDate = (date: Date): string => {
   return date.toISOString().slice(0, 10);

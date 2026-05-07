@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node src/index.ts",
-    "start": "ts-node src/index.ts",
-    "schedule": "ts-node src/scheduler/dailyScheduler.ts",
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "run-once": "tsx src/runOnce.ts",
+    "schedule": "tsx src/scheduler/dailyScheduler.ts",
     "typecheck": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +20,7 @@
     "@langchain/openai": "^1.4.4",
     "axios": "^1.15.1",
     "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "langchain": "^1.3.3",
     "node-cron": "^4.2.1",
     "openai": "^6.34.0",
@@ -26,8 +28,10 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^25.6.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^6.0.3"
   }
 }

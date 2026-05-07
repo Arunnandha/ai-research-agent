@@ -34,7 +34,7 @@ const insightSchema = z.object({
 
 export class InsightAgent {
   private readonly llm = new ChatOpenAI({
-    model: "gpt-4o-mini",
+    model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
     temperature: 0.2,
   });
 

@@ -5,7 +5,7 @@ import cron from "node-cron";
 import { runIntelligencePipeline } from "../agents/index.js";
 import { log, saveDailyReport } from "../utils/index.js";
 
-const CRON_EXPRESSION = "30 8 * * *";
+const CRON_EXPRESSION = process.env.CRON_SCHEDULE ?? "30 8 * * *";
 
 const runScheduledPipeline = async (): Promise<void> => {
   try {

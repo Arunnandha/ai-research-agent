@@ -36,13 +36,17 @@ const PRODUCT_HUNT_TOP_PRODUCTS_QUERY = `
 
 export const fetchTopProductHuntProducts = async (): Promise<ProductHuntProduct[]> => {
   const token = process.env.PRODUCT_HUNT_ACCESS_TOKEN;
+  const apiUrl = process.env.PRODUCT_HUNT_API_URL;
 
   if (!token) {
     throw new Error("Missing PRODUCT_HUNT_ACCESS_TOKEN environment variable.");
   }
+  if (!apiUrl) {
+    throw new Error("Missing PRODUCT_HUNT_API_URL environment variable.");
+  }
 
   const response = await axios.post<ProductHuntResponse>(
-    "https://api.producthunt.com/v2/api/graphql",
+    apiUrl,
     {
       query: PRODUCT_HUNT_TOP_PRODUCTS_QUERY,
     },

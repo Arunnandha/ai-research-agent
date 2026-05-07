@@ -8,11 +8,9 @@ export interface RssNewsItem {
   link: string;
 }
 
-const DEFAULT_AI_RSS_FEEDS = [
-  "https://www.artificialintelligence-news.com/feed/",
-  "https://openai.com/news/rss.xml",
-  "https://deepmind.google/blog/rss.xml",
-];
+const DEFAULT_AI_RSS_FEEDS = process.env.RSS_FEED_URLS
+  ? process.env.RSS_FEED_URLS.split(",").map((url) => url.trim())
+  : [];
 
 const parser = new Parser();
 

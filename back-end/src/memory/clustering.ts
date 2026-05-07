@@ -68,7 +68,7 @@ export const clusterItemsByEmbeddingSimilarity = async (
 
   try {
     const embeddings = new OpenAIEmbeddings({
-      model: "text-embedding-3-small",
+      model: process.env.OPENAI_EMBEDDING_MODEL ?? "text-embedding-3-small",
     });
     const vectors = await embeddings.embedDocuments(items.map(buildItemText));
     const visited = new Set<number>();

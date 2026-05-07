@@ -21,7 +21,7 @@ const classificationSchema = z.object({
 
 export class ClassificationAgent {
   private readonly llm = new ChatOpenAI({
-    model: "gpt-4o-mini",
+    model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
     temperature: 0.1,
   });
 
