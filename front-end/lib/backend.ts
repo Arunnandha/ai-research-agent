@@ -1,7 +1,7 @@
 const BACKEND_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
 export const triggerPipelineRun = async (): Promise<{ success: boolean; error?: string }> => {
-  const res = await fetch(`${BACKEND_API_URL}/api/run`, { method: "POST" });
+  const res = await fetch(`${BACKEND_API_URL}api/run`, { method: "POST" });
   return res.json();
 };
 
